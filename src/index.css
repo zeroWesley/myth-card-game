@@ -33,30 +33,71 @@
   }
 }
 
-/* 卡牌悬停动画 */
-@keyframes card-hover {
-  from { transform: translateY(0) rotate(0deg); }
-  to { transform: translateY(-12px) rotate(2deg); }
+/* ── 出牌飞行动画 ── */
+@keyframes fly-card {
+  0% {
+    opacity: 0.9;
+    transform: translate(0, 0) scale(1);
+  }
+  60% {
+    opacity: 0.7;
+    transform: translate(var(--tx), var(--ty)) scale(0.6);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--tx), var(--ty)) scale(0.1);
+  }
 }
 
+/* ── 敌人受击抖动 ── */
+@keyframes enemy-shake {
+  0%   { transform: translateX(0); }
+  15%  { transform: translateX(-8px) rotate(-2deg); }
+  30%  { transform: translateX(8px) rotate(2deg); }
+  45%  { transform: translateX(-6px); }
+  60%  { transform: translateX(6px); }
+  75%  { transform: translateX(-3px); }
+  100% { transform: translateX(0); }
+}
+
+/* ── 伤害数字上浮 ── */
+@keyframes dmg-float {
+  0%   { transform: translateX(-50%) translateY(0); opacity: 1; }
+  40%  { transform: translateX(-50%) translateY(-24px); opacity: 1; }
+  100% { transform: translateX(-50%) translateY(-48px); opacity: 0; }
+}
+
+/* ── 全屏震动 ── */
+@keyframes screen-shake {
+  0%   { transform: translate(0, 0); }
+  20%  { transform: translate(-4px, 2px); }
+  40%  { transform: translate(4px, -2px); }
+  60%  { transform: translate(-3px, 1px); }
+  80%  { transform: translate(3px, -1px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* ── 气力脉冲 ── */
+@keyframes qi-pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* ── 其他通用动画 ── */
 @keyframes fade-in {
   from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes damage-flash {
-  0% { filter: brightness(1); }
-  50% { filter: brightness(2) sepia(1) hue-rotate(-30deg); }
+  0%   { filter: brightness(1); }
+  50%  { filter: brightness(2) sepia(1) hue-rotate(-30deg); }
   100% { filter: brightness(1); }
 }
 
-@keyframes qi-pulse {
-  0%, 100% { box-shadow: 0 0 6px var(--gold); }
-  50% { box-shadow: 0 0 18px var(--gold), 0 0 36px var(--gold); }
-}
-
 .card-hover-anim:hover {
-  animation: card-hover 0.2s ease forwards;
+  transform: translateY(-12px);
+  transition: transform 0.15s ease;
 }
 
 .fade-in {
@@ -65,10 +106,6 @@
 
 .damage-flash {
   animation: damage-flash 0.3s ease;
-}
-
-.qi-pulse {
-  animation: qi-pulse 1.5s ease-in-out infinite;
 }
 
 /* 水墨纸纹背景 */

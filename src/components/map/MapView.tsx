@@ -121,8 +121,8 @@ export function MapView() {
               <div key={layerIdx} className="mb-1">
                 <div className={`text-xs tracking-widest text-center mb-2 select-none ${
                   isCurrentFloor ? 'text-[#fbbf24]' :
-                  isPastFloor   ? 'text-[#8b6655]' :
-                                  'text-[#4a2e1a]'
+                  isPastFloor   ? 'text-[#c8a870]' :
+                                  'text-[#9a7050]'
                 }`}>
                   {LAYER_TITLES[layerIdx]}
                   {isPastFloor && <span className="ml-2 text-[#d4af37]">✓</span>}
@@ -288,8 +288,8 @@ export function MapView() {
                   <div
                     className={`text-xs writing-vertical select-none tracking-widest ${
                       isCurrentFloor ? 'text-[#fbbf24]' :
-                      isPastFloor   ? 'text-[#7a5535]' :
-                                      'text-[#3a1e0a]'
+                      isPastFloor   ? 'text-[#c8a870]' :
+                                      'text-[#9a7050]'
                     }`}
                     style={{ writingMode: 'vertical-rl' }}
                   >
