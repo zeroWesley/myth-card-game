@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --ink-dark: #1a0a00;
+    --ink-mid: #3d1f00;
+    --ink-light: #8b5e3c;
+    --paper: #f5e6c8;
+    --paper-dark: #e8d5a3;
+    --red-seal: #c0392b;
+    --gold: #d4af37;
+    --jade: #2e8b57;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: var(--ink-dark);
+    color: var(--paper);
+    font-family: 'Noto Serif SC', 'STSong', '宋体', serif;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  #root {
+    width: 100vw;
+    height: 100vh;
+  }
+}
+
+/* 卡牌悬停动画 */
+@keyframes card-hover {
+  from { transform: translateY(0) rotate(0deg); }
+  to { transform: translateY(-12px) rotate(2deg); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes damage-flash {
+  0% { filter: brightness(1); }
+  50% { filter: brightness(2) sepia(1) hue-rotate(-30deg); }
+  100% { filter: brightness(1); }
+}
+
+@keyframes qi-pulse {
+  0%, 100% { box-shadow: 0 0 6px var(--gold); }
+  50% { box-shadow: 0 0 18px var(--gold), 0 0 36px var(--gold); }
+}
+
+.card-hover-anim:hover {
+  animation: card-hover 0.2s ease forwards;
+}
+
+.fade-in {
+  animation: fade-in 0.4s ease forwards;
+}
+
+.damage-flash {
+  animation: damage-flash 0.3s ease;
+}
+
+.qi-pulse {
+  animation: qi-pulse 1.5s ease-in-out infinite;
+}
+
+/* 水墨纸纹背景 */
+.paper-bg {
+  background-color: var(--paper);
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 28px,
+      rgba(0,0,0,0.03) 28px,
+      rgba(0,0,0,0.03) 29px
+    );
+}
+
+/* 描边文字（印章感） */
+.seal-text {
+  text-shadow: 1px 1px 0 var(--red-seal), -1px -1px 0 var(--red-seal);
+}
