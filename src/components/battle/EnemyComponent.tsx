@@ -9,7 +9,7 @@ interface Props {
   showIntent?: boolean
 }
 
-export function EnemyComponent({ enemy, index, selected, onClick, showIntent }: Props) {
+export function EnemyComponent({ enemy, index: _index, selected, onClick, showIntent }: Props) {
   const def = ENEMIES[enemy.defId]
   if (!def) return null
 

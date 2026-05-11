@@ -1,4 +1,4 @@
-import type { CardDef } from '../types'
+import type { CardDef, CardId } from '../types'
 
 // ============================================================
 // 卡牌数据定义（MVP：30张）

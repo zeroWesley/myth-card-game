@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import type {
   GamePhase, GameMap, CombatState, PlayerRun, EventDef,
-  ShopState, CharacterId, MapNode, ShopItem,
+  ShopState, CharacterId, ShopItem,
 } from '../types'
 import { CHARACTERS } from '../data/characters'
 import { TREASURES, TREASURE_POOL_BY_GRADE } from '../data/treasures'
@@ -9,7 +9,7 @@ import { CARDS, COMMON_CARD_POOL } from '../data/cards'
 import { EVENTS } from '../data/events'
 import { generateMap, getEnemyIdForNode } from '../engine/mapGenerator'
 import {
-  initCombat, playCard, endTurn, useCharacterSkill, healPlayer,
+  initCombat, playCard, endTurn, useCharacterSkill,
 } from '../engine/combatEngine'
 
 interface GameStore {
@@ -41,7 +41,7 @@ function pickRandom<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)]
 }
 
-function generateShop(currentDeck: string[]): ShopState {
+function generateShop(_currentDeck: string[]): ShopState {
   const cards = COMMON_CARD_POOL
     .sort(() => Math.random() - 0.5)
     .slice(0, 4)

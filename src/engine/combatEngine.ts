@@ -1,7 +1,6 @@
 import type { CombatState, CombatCard, EnemyState, CardDef, CharacterDef, TreasureDef, EnemyDef } from '../types'
 import { CARDS } from '../data/cards'
 import { ENEMIES } from '../data/enemies'
-import { TREASURES } from '../data/treasures'
 
 // ============================================================
 // 战斗引擎 —— 纯函数，不持有任何状态
@@ -46,7 +45,7 @@ export function startTurn(
   charDef: CharacterDef,
   treasures: TreasureDef[]
 ): CombatState {
-  let s = { ...state, phase: 'player_turn' as const }
+  let s: CombatState = { ...state, phase: 'player_turn' as const }
 
   // 重置格挡（格挡不跨回合）
   s = { ...s, playerBlock: 0, qi: s.qiMax, doubleNextAttack: false }

@@ -1,7 +1,7 @@
 import { useGameStore } from '../../store/gameStore'
 
 export function MainMenu() {
-  const { phase, startRun } = useGameStore()
+  const { phase } = useGameStore()
 
   if (phase !== 'main_menu') return null
 
