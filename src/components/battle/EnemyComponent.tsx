@@ -21,7 +21,7 @@ export function EnemyComponent({ enemy, index: _index, selected, onClick, showIn
     return (
       <div className="flex flex-col items-center opacity-20">
         <div className="text-4xl">💀</div>
-        <div className="text-xs text-[#8b5e3c] mt-1">{def.name}</div>
+        <div className="text-xs text-[#b08060] mt-1">{def.name}</div>
       </div>
     )
   }
@@ -37,7 +37,7 @@ export function EnemyComponent({ enemy, index: _index, selected, onClick, showIn
       {/* 意图 */}
       {showIntent && nextAction && (
         <div className="mb-2 text-xs text-center max-w-[120px]">
-          <div className="bg-[#1a0a00] border border-[#3d1f00] px-2 py-1 rounded text-[#d4af37]">
+          <div className="bg-[#1a0a00] border border-[#7a4a2a] px-2 py-1 rounded text-[#fbbf24]">
             {nextAction.type === 'attack' ? `⚔ ${nextAction.description}`
               : nextAction.type === 'defend' ? `🛡 ${nextAction.description}`
               : nextAction.type === 'buff' ? `✨ ${nextAction.description}`
@@ -52,12 +52,12 @@ export function EnemyComponent({ enemy, index: _index, selected, onClick, showIn
         className={`
           w-20 h-24 border flex flex-col items-center justify-center text-4xl
           transition-all duration-150 relative
-          ${selected ? 'border-[#c0392b]' : 'border-[#3d1f0066]'}
+          ${selected ? 'border-[#f87171]' : 'border-[#5a3a2a]'}
           ${def.isBoss ? 'w-28 h-32 text-5xl' : ''}
         `}
         style={{
-          backgroundColor: selected ? '#c0392b11' : '#1a0a00',
-          boxShadow: selected ? '0 0 20px #c0392b66' : 'none',
+          backgroundColor: selected ? '#f8717122' : '#1a0a00',
+          boxShadow: selected ? '0 0 20px #f8717166' : 'none',
           clipPath: 'polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%)',
         }}
       >
@@ -74,7 +74,7 @@ export function EnemyComponent({ enemy, index: _index, selected, onClick, showIn
 
       {/* 血条 */}
       <div className="w-28 mt-1">
-        <div className="flex justify-between text-[10px] text-[#8b5e3c] mb-0.5">
+        <div className="flex justify-between text-[10px] text-[#c8a870] mb-0.5">
           <span>{enemy.currentHp}</span>
           <span>{enemy.maxHp}</span>
         </div>
@@ -83,7 +83,7 @@ export function EnemyComponent({ enemy, index: _index, selected, onClick, showIn
             className="h-full rounded-full transition-all duration-300"
             style={{
               width: `${hpPercent}%`,
-              backgroundColor: hpPercent > 50 ? '#c0392b' : hpPercent > 25 ? '#e67e22' : '#e74c3c',
+              backgroundColor: hpPercent > 50 ? '#ef4444' : hpPercent > 25 ? '#f97316' : '#dc2626',
             }}
           />
         </div>
@@ -92,7 +92,7 @@ export function EnemyComponent({ enemy, index: _index, selected, onClick, showIn
       {/* 状态效果 */}
       <div className="flex gap-1 mt-1">
         {Object.entries(enemy.statuses).map(([k, v]) => v && v > 0 ? (
-          <span key={k} className="text-[9px] border border-[#3d1f00] px-1 text-[#8b5e3c]">
+          <span key={k} className="text-[9px] border border-[#7a4a2a] px-1 text-[#c8a870]">
             {k === 'burn' ? `🔥${v}` : k === 'poison' ? `☠${v}` : k === 'vulnerable' ? `💔${v}` : `${k}${v}`}
           </span>
         ) : null)}

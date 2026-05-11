@@ -24,7 +24,6 @@ export function BattleView() {
   // 战斗胜利：显示奖励界面
   if (combat.phase === 'victory' && !pickedReward) {
     if (!rewardCards) {
-      // 生成3个奖励卡
       const pool = COMMON_CARD_POOL.filter(id => !run.deck.includes(id))
       const rewards = [
         pickRandom(pool.filter(id => CARDS[id]?.rarity === 'rare') || pool),
@@ -35,28 +34,28 @@ export function BattleView() {
     }
     return (
       <div className="flex flex-col items-center justify-center h-full bg-[#0d0500] text-[#f5e6c8]">
-        <div className="text-[#d4af37] text-3xl mb-2 tracking-wider">⚔ 战斗胜利</div>
-        <div className="text-[#8b5e3c] text-sm mb-8">选择一张卡牌加入牌库</div>
+        <div className="text-[#fbbf24] text-3xl mb-2 tracking-wider">⚔ 战斗胜利</div>
+        <div className="text-[#c8a870] text-sm mb-8">选择一张卡牌加入牌库</div>
         <div className="flex gap-6 mb-8">
           {(rewardCards || []).map(cardId => {
             const def = CARDS[cardId]
             if (!def) return null
             return (
               <div key={cardId}
-                className="cursor-pointer border border-[#3d1f00] p-4 hover:border-[#d4af37] transition-colors w-40"
+                className="cursor-pointer border border-[#5a3a2a] p-4 hover:border-[#fbbf24] transition-colors w-40 bg-[#1a0a00]"
                 onClick={() => {
                   setPickedReward(true)
                   collectReward(cardId)
                 }}
               >
-                <div className="text-center font-bold mb-2">{def.name}</div>
-                <div className="text-xs text-[#8b5e3c] text-center">{def.description}</div>
+                <div className="text-center font-bold mb-2 text-[#f5e6c8]">{def.name}</div>
+                <div className="text-xs text-[#d4b896] text-center">{def.description}</div>
               </div>
             )
           })}
         </div>
         <button
-          className="text-sm text-[#8b5e3c] underline"
+          className="text-sm text-[#c8a870] underline hover:text-[#fbbf24] transition-colors"
           onClick={() => { setPickedReward(true); collectReward() }}
         >
           跳过，不取卡牌
@@ -68,11 +67,11 @@ export function BattleView() {
   if (combat.phase === 'defeat') {
     return (
       <div className="flex flex-col items-center justify-center h-full bg-[#0d0500] text-[#f5e6c8]">
-        <div className="text-[#c0392b] text-4xl mb-4">💀 战败</div>
-        <div className="text-[#8b5e3c] mb-8">你已倒在征途之中...</div>
+        <div className="text-[#f87171] text-4xl mb-4">💀 战败</div>
+        <div className="text-[#c8a870] mb-8">你已倒在征途之中...</div>
         <button
           onClick={() => useGameStore.getState().backToMenu()}
-          className="px-6 py-3 border border-[#3d1f00] hover:border-[#8b5e3c] transition-colors"
+          className="px-6 py-3 border border-[#5a3a2a] text-[#c8a870] hover:border-[#c8a870] hover:text-[#fbbf24] transition-colors"
         >
           返回主菜单
         </button>
@@ -93,7 +92,6 @@ export function BattleView() {
     if (!def || def.cost > combat.qi) return
 
     if (selectedCard === instanceId) {
-      // 二次点击：出牌
       storePlayCard(instanceId, selectedEnemy)
       setSelectedCard(null)
     } else {
@@ -104,28 +102,28 @@ export function BattleView() {
   return (
     <div className="flex flex-col h-full bg-[#0d0500] text-[#f5e6c8] select-none">
       {/* 顶部：玩家状态栏 */}
-      <div className="flex items-center justify-between px-4 py-2 border-b border-[#3d1f00] bg-[#1a0a00]">
+      <div className="flex items-center justify-between px-4 py-2 border-b border-[#5a3a2a] bg-[#1a0a00]">
         {/* 血量 */}
         <div className="flex items-center gap-3">
           <div>
-            <div className="text-xs text-[#8b5e3c]">生命</div>
+            <div className="text-xs text-[#b08060]">生命</div>
             <div className="flex items-center gap-1">
-              <span className="text-[#c0392b] font-bold text-lg">{combat.playerHp}</span>
-              <span className="text-[#3d1f00]">/</span>
-              <span className="text-[#8b5e3c]">{combat.playerMaxHp}</span>
+              <span className="text-[#f87171] font-bold text-lg">{combat.playerHp}</span>
+              <span className="text-[#8b6655]">/</span>
+              <span className="text-[#e0c8a0]">{combat.playerMaxHp}</span>
             </div>
             <div className="w-32 h-2 bg-[#3d1f00] rounded-full mt-0.5 overflow-hidden">
               <div
                 className="h-full rounded-full transition-all"
                 style={{
                   width: `${(combat.playerHp / combat.playerMaxHp) * 100}%`,
-                  backgroundColor: '#c0392b',
+                  backgroundColor: '#ef4444',
                 }}
               />
             </div>
           </div>
           {combat.playerBlock > 0 && (
-            <div className="text-[#2e8b57] font-bold">
+            <div className="text-[#34d399] font-bold text-base">
               🛡 {combat.playerBlock}
             </div>
           )}
@@ -133,7 +131,7 @@ export function BattleView() {
 
         {/* 气力 */}
         <div className="flex flex-col items-center">
-          <div className="text-xs text-[#8b5e3c] mb-1">气力</div>
+          <div className="text-xs text-[#b08060] mb-1">气力</div>
           <div className="flex gap-1">
             {Array.from({ length: combat.qiMax }).map((_, i) => (
               <div
@@ -141,23 +139,23 @@ export function BattleView() {
                 className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold border transition-all"
                 style={{
                   backgroundColor: i < combat.qi ? '#d4af3733' : 'transparent',
-                  borderColor: i < combat.qi ? '#d4af37' : '#3d1f00',
-                  color: i < combat.qi ? '#d4af37' : '#3d1f00',
-                  boxShadow: i < combat.qi ? '0 0 6px #d4af3788' : 'none',
+                  borderColor: i < combat.qi ? '#fbbf24' : '#5a3a2a',
+                  color: i < combat.qi ? '#fbbf24' : '#5a3a2a',
+                  boxShadow: i < combat.qi ? '0 0 6px #fbbf2488' : 'none',
                 }}
               >⚡</div>
             ))}
           </div>
-          <div className="text-xs mt-1 text-[#d4af37]">{combat.qi} / {combat.qiMax}</div>
+          <div className="text-xs mt-1 text-[#fbbf24] font-semibold">{combat.qi} / {combat.qiMax}</div>
         </div>
 
         {/* 角色名+天命 */}
         <div className="text-right">
           <div className="font-bold" style={{ color: char.color }}>{char.name}</div>
           {fateActivated ? (
-            <div className="text-xs text-[#8b5cf6]">⚡ 天命已激活</div>
+            <div className="text-xs text-[#c4b5fd]">⚡ 天命已激活</div>
           ) : (
-            <div className="text-xs text-[#3d1f00]">
+            <div className="text-xs text-[#9a6a3a]">
               天命 {fateProgress}/{fateTotal}
             </div>
           )}
@@ -182,13 +180,13 @@ export function BattleView() {
 
         {/* 回合日志（最新一条） */}
         {combat.log.length > 0 && (
-          <div className="text-center text-xs text-[#8b5e3c] px-4 py-1 bg-[#1a0a0088]">
+          <div className="text-center text-xs text-[#d4b896] px-4 py-1 bg-[#1a0a00cc]">
             {combat.log[combat.log.length - 1]}
           </div>
         )}
 
         {/* 手牌区 */}
-        <div className="bg-[#1a0a00] border-t border-[#3d1f00] p-3">
+        <div className="bg-[#1a0a00] border-t border-[#5a3a2a] p-3">
           {/* 手牌 */}
           <div className="flex gap-2 overflow-x-auto pb-2 justify-center flex-wrap">
             {combat.hand.map(card => {
@@ -205,14 +203,14 @@ export function BattleView() {
               )
             })}
             {combat.hand.length === 0 && isPlayerTurn && (
-              <div className="text-[#3d1f00] text-sm self-center py-4">手牌已空</div>
+              <div className="text-[#8b6655] text-sm self-center py-4">手牌已空</div>
             )}
           </div>
 
           {/* 底部操作按钮 */}
           <div className="flex items-center justify-between mt-2 px-2">
             {/* 牌库/弃牌堆计数 */}
-            <div className="flex gap-4 text-xs text-[#8b5e3c]">
+            <div className="flex gap-4 text-xs text-[#b08060]">
               <span>牌库 {combat.deck.length}</span>
               <span>弃牌 {combat.discard.length}</span>
               <span>消耗 {combat.exhaust.length}</span>
@@ -225,8 +223,8 @@ export function BattleView() {
               className={`
                 px-4 py-2 text-xs border tracking-wider transition-all
                 ${isPlayerTurn && combat.qi >= char.skill.cost
-                  ? 'border-[#8b5cf6] text-[#8b5cf6] hover:bg-[#8b5cf622]'
-                  : 'border-[#3d1f00] text-[#3d1f00] cursor-not-allowed'
+                  ? 'border-[#a78bfa] text-[#a78bfa] hover:bg-[#a78bfa22]'
+                  : 'border-[#5a3a2a] text-[#5a3a2a] cursor-not-allowed'
                 }
               `}
               style={{ clipPath: 'polygon(4px 0,100% 0,calc(100% - 4px) 100%,0 100%)' }}
@@ -241,8 +239,8 @@ export function BattleView() {
               className={`
                 px-6 py-2 font-bold tracking-wider text-sm transition-all
                 ${isPlayerTurn
-                  ? 'bg-[#d4af37] text-[#1a0a00] hover:bg-[#e8c84a]'
-                  : 'bg-[#3d1f00] text-[#1a0a00] cursor-not-allowed'
+                  ? 'bg-[#d4af37] text-[#1a0a00] hover:bg-[#fbbf24]'
+                  : 'bg-[#3d1f00] text-[#7a5535] cursor-not-allowed'
                 }
               `}
               style={{ clipPath: 'polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%)' }}

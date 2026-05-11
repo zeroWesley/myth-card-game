@@ -9,10 +9,10 @@ interface Props {
 }
 
 const TYPE_COLORS: Record<string, string> = {
-  attack: '#c0392b',
-  defense: '#2e8b57',
-  spell: '#d4af37',
-  trick: '#06b6d4',
+  attack: '#f87171',
+  defense: '#34d399',
+  spell: '#fbbf24',
+  trick: '#38bdf8',
 }
 const TYPE_LABELS: Record<string, string> = {
   attack: '攻击',
@@ -75,7 +75,7 @@ export function CardComponent({ card, selected, playable, onClick }: Props) {
       </div>
 
       {/* 描述 */}
-      <div className="text-[10px] text-[#8b5e3c] text-center px-1 pb-2 leading-tight min-h-[2.5rem]">
+      <div className="text-[10px] text-[#d4b896] text-center px-1 pb-2 leading-tight min-h-[2.5rem]">
         {def.description}
       </div>
     </div>
